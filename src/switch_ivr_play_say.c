@@ -1714,8 +1714,9 @@ SWITCH_DECLARE(switch_status_t) switch_ivr_play_file(switch_core_session_t *sess
 			switch_channel_set_variable_printf(channel, "playback_seconds", "%d", fh->samples_in / read_impl.samples_per_second);
 			switch_channel_set_variable_printf(channel, "playback_ms", "%d", fh->samples_in / (read_impl.samples_per_second / 1000));
 		}
-		switch_channel_set_variable_printf(channel, "playback_samples", "%d", fh->samples_in);
-
+		switch_channel_set_variable_printf(channel, "playback_samples", "%d", fh->samples_in);		
+		switch_channel_set_variable_printf(channel, "playback_offset_pos", "%d", fh->offset_pos);
+		
 		if (switch_event_create(&event, SWITCH_EVENT_PLAYBACK_STOP) == SWITCH_STATUS_SUCCESS) {
 			switch_channel_event_set_data(channel, event);
 			if (!strncasecmp(file, "local_stream:", 13)) {
